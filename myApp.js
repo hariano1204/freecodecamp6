@@ -1,12 +1,26 @@
+// Load environment variables
 require('dotenv').config();
+
+// Import mongoose
 const mongoose = require('mongoose');
 
+// Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-let Person;
+// ✅ Define Schema
+const personSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  age: Number,
+  favoriteFoods: [String]
+});
+
+// ✅ Create Model
+const Person = mongoose.model("Person", personSchema);
+
+// ==== No modifiques lo que sigue hasta que FreeCodeCamp lo pida ====
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
@@ -30,13 +44,11 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
   done(null /*, data*/);
 };
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
   done(null /*, data*/);
 };
 
@@ -46,22 +58,15 @@ const removeById = (personId, done) => {
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
   done(null /*, data*/);
 };
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
   done(null /*, data*/);
 };
 
-/** **Well Done !!**
-/* You completed these challenges, let's go celebrate !
- */
-
-//----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
-
+// ✅ Export model for FreeCodeCamp tests
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
 exports.findPeopleByName = findPeopleByName;

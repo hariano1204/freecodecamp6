@@ -23,8 +23,20 @@ const Person = mongoose.model("Person", personSchema);
 // ==== No modifiques lo que sigue hasta que FreeCodeCamp lo pida ====
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  // Creamos una nueva persona usando el modelo Person
+  const person = new Person({
+    name: "Tomás Saavedra",
+    age: 25,
+    favoriteFoods: ["pizza", "hamburguesa", "sushi"]
+  });
+
+  // Guardamos la persona en la base de datos
+  person.save((err, data) => {
+    if (err) return console.error(err);
+    done(null, data);
+  });
 };
+
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);

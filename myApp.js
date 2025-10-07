@@ -132,8 +132,17 @@ const removeManyPeople = (done) => {
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-  done(null /*, data*/);
+
+  Person.find({ favoriteFoods: foodToSearch })
+    .sort({ name: 1 })        // Ordenar alfabéticamente (ascendente)
+    .limit(2)                 // Limitar a 2 resultados
+    .select("-age")           // Excluir el campo "age"
+    .exec((err, data) => {
+      if (err) return console.error(err);
+      done(null, data);
+    });
 };
+
 
 // ✅ Export model for FreeCodeCamp tests
 exports.PersonModel = Person;
